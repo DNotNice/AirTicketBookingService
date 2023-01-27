@@ -7,7 +7,7 @@ class ValidationError extends Error {
         error.errors.forEach(element => {
             explanation.push(element.message);
         });
-        this.name = 'Validation Error';
+        this.name = 'ValidationError';
         this.message = 'Not able to validate the data sent in the request' ;
         this.explanation = explanation ;
         this.statusCode = StatusCodes.BAD_REQUEST 

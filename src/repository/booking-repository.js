@@ -12,7 +12,22 @@ class BookingRepository{
             if(error.name =='SequelizeValidationError'){
                 throw new ValidationError(error);
             }
-            throw new AppError('Repository Error' ,'Cannot create a booking',
+            throw new AppError('RepositoryError' ,'Cannot create a booking',
+             'There was some issue creating the booking , try again later',
+             StatusCodes.INTERNAL_SERVER_ERROR);
+        }
+    }
+    async update(bookingId , data){
+        try {
+            const booking = await Booking.findByPk(bookingId);
+            if(data.status) booking.status = data.status;
+            await booking.save();
+            return booking;
+        } catch (error) {
+            if(error.name =='SequelizeValidationError'){
+                throw new ValidationError(error);
+            }
+            throw new AppError('RepositoryError' ,'Cannot create a booking',
              'There was some issue creating the booking , try again later',
              StatusCodes.INTERNAL_SERVER_ERROR);
         }
